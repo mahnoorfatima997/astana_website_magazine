@@ -6,21 +6,23 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "../components/card";
 import { Button } from "../components/button";
 
-
 export default function Component() {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    // This assumes your images are in the public/assets directory
-    const imageList = [
-      "/assets/Astana Issue 02 Final (1)-compressed-001.png",
-      "/assets/Astana Issue 02 Final (1)-compressed-003.png",
-      "/assets/Astana Issue 02 Final (1)-compressed-004.png",
-      "/assets/Astana Issue 02 Final (1)-compressed-005.png",
-      "/assets/Astana Issue 02 Final (1)-compressed-006.png"
-    ];
-    setImages(imageList);
+    async function fetchImages() {
+      try {
+        const response = await fetch('/api/images');
+        const imageList = await response.json();
+        setImages(imageList);
+      } catch (error) {
+        console.error('Error fetching images:', error);
+        setImages([]);
+      }
+    }
+    
+    fetchImages();
   }, []);
 
   const goToPrevious = () => {
