@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -6,16 +7,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "../components/card";
 import { Button } from "../components/button";
 
-const images = [];
-
-if (typeof window !== "undefined") {
-  const context = require.context(
-    "../public/assets",
-    false,
-    /\.(png|jpe?g|gif)$/i,
-  );
-  images.push(...context.keys().map(context));
-}
+const images = [
+  "/assets/Astana Issue 02 Final (1)-compressed-001.png",
+  "/assets/Astana Issue 02 Final (1)-compressed-003.png",
+  "/assets/Astana Issue 02 Final (1)-compressed-004.png",
+  "/assets/Astana Issue 02 Final (1)-compressed-005.png",
+  "/assets/Astana Issue 02 Final (1)-compressed-006.png"
+];
 
 export default function Component() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,7 +24,7 @@ export default function Component() {
 
   const goToNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex < images.length - 2 ? prevIndex + 2 : prevIndex,
+      prevIndex < images.length - 2 ? prevIndex + 2 : prevIndex
     );
   };
 
@@ -34,52 +32,49 @@ export default function Component() {
     if (index >= images.length) return null;
 
     return (
-      <div className="relative h-full flex-1">
+      <div className="relative h-full w-1/2" style={{ position: 'relative' }}>
         <Image
           src={images[index]}
           alt={`Page ${index + 1}`}
           fill
-          className="object-contain"
+          style={{ objectFit: 'contain' }}
         />
       </div>
     );
   };
 
   return (
-    <div className="w-full max-w-[95vw] mx-auto space-y-4 p-2">
+    <div className="container mx-auto p-4">
       <div className="relative">
         <Card className="overflow-hidden">
-          <CardContent className="relative p-0 h-[90vh] flex">
+          <CardContent className="relative p-4 h-[70vh] flex">
             {renderPage(currentIndex)}
             {renderPage(currentIndex + 1)}
           </CardContent>
         </Card>
 
-        <div className="absolute left-0 right-0 top-0 bottom-0 flex items-center justify-between">
+        <div className="absolute inset-0 flex items-center justify-between px-4">
           <Button
             variant="ghost"
-            size="icon"
-            className="relative left-4 h-16 w-16 rounded-full bg-background/50 hover:bg-background/70"
+            className="h-10 w-10 rounded-full bg-white/70 hover:bg-white/90"
             onClick={goToPrevious}
             disabled={currentIndex === 0}
           >
-            <ChevronLeft className="h-8 w-8" />
+            <ChevronLeft className="h-6 w-6" />
           </Button>
           <Button
             variant="ghost"
-            size="icon"
-            className="relative right-4 h-16 w-16 rounded-full bg-background/50 hover:bg-background/70"
+            className="h-10 w-10 rounded-full bg-white/70 hover:bg-white/90"
             onClick={goToNext}
             disabled={currentIndex >= images.length - 2}
           >
-            <ChevronRight className="h-8 w-8" />
+            <ChevronRight className="h-6 w-6" />
           </Button>
         </div>
       </div>
 
-      <div className="mt-2 text-sm text-center text-muted-foreground">
-        Pages {currentIndex + 1}-{Math.min(currentIndex + 2, images.length)} of{" "}
-        {images.length}
+      <div className="mt-4 text-center text-sm text-gray-600">
+        Pages {currentIndex + 1}-{Math.min(currentIndex + 2, images.length)} of {images.length}
       </div>
     </div>
   );
