@@ -6,17 +6,16 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "../components/card";
 import { Button } from "../components/button";
 
-import { readdirSync } from 'fs';
-import { join } from 'path';
+import { readdirSync } from "fs";
 
 const getImages = () => {
   try {
-    const imageFiles = readdirSync(join(process.cwd(), 'public/assets'))
-      .filter(file => /\.(png|jpe?g|gif)$/i.test(file))
-      .map(file => `/assets/${file}`);
+    const imageFiles = readdirSync("../public/assets/")
+      .filter((file) => /\.(png|jpe?g|gif)$/i.test(file))
+      .map((file) => `/assets/${file}`);
     return imageFiles;
   } catch (error) {
-    console.error('Error reading assets directory:', error);
+    console.error("Error reading assets directory:", error);
     return [];
   }
 };
