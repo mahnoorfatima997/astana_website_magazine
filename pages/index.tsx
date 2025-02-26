@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -8,11 +7,11 @@ import { Card, CardContent } from "../components/card";
 import { Button } from "../components/button";
 
 const images = [
-  "/assets/Astana Issue 02 Final (1)-compressed-001.png",
-  "/assets/Astana Issue 02 Final (1)-compressed-003.png",
+  "../public/assets/Astana Issue 02 Final (1)-compressed-001.png",
+  "../public/assets/Astana Issue 02 Final (1)-compressed-003.png",
   "/assets/Astana Issue 02 Final (1)-compressed-004.png",
   "/assets/Astana Issue 02 Final (1)-compressed-005.png",
-  "/assets/Astana Issue 02 Final (1)-compressed-006.png"
+  "/assets/Astana Issue 02 Final (1)-compressed-006.png",
 ];
 
 export default function Component() {
@@ -24,7 +23,7 @@ export default function Component() {
 
   const goToNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex < images.length - 2 ? prevIndex + 2 : prevIndex
+      prevIndex < images.length - 2 ? prevIndex + 2 : prevIndex,
     );
   };
 
@@ -32,12 +31,12 @@ export default function Component() {
     if (index >= images.length) return null;
 
     return (
-      <div className="relative h-full w-1/2" style={{ position: 'relative' }}>
+      <div className="relative h-full w-1/2" style={{ position: "relative" }}>
         <Image
           src={images[index]}
           alt={`Page ${index + 1}`}
           fill
-          style={{ objectFit: 'contain' }}
+          style={{ objectFit: "contain" }}
         />
       </div>
     );
@@ -74,7 +73,8 @@ export default function Component() {
       </div>
 
       <div className="mt-4 text-center text-sm text-gray-600">
-        Pages {currentIndex + 1}-{Math.min(currentIndex + 2, images.length)} of {images.length}
+        Pages {currentIndex + 1}-{Math.min(currentIndex + 2, images.length)} of{" "}
+        {images.length}
       </div>
     </div>
   );
