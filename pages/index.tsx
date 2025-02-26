@@ -6,13 +6,16 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "../components/card";
 import { Button } from "../components/button";
 
-const images = [
-  "/assets/Astana Issue 02 Final (1)-compressed-001.png",
-  "/assets/Astana Issue 02 Final (1)-compressed-003.png",
-  "/assets/Astana Issue 02 Final (1)-compressed-004.png",
-  "/assets/Astana Issue 02 Final (1)-compressed-005.png",
-  "/assets/Astana Issue 02 Final (1)-compressed-006.png"
-];
+const images = [];
+
+if (typeof window !== "undefined") {
+  const context = require.context(
+    "../public/assets",
+    false,
+    /\.(png|jpe?g|gif)$/i,
+  );
+  images.push(...context.keys().map(context));
+}
 
 export default function Component() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,7 +26,7 @@ export default function Component() {
 
   const goToNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex < images.length - 2 ? prevIndex + 2 : prevIndex
+      prevIndex < images.length - 2 ? prevIndex + 2 : prevIndex,
     );
   };
 
@@ -75,7 +78,8 @@ export default function Component() {
       </div>
 
       <div className="mt-2 text-sm text-center text-muted-foreground">
-        Pages {currentIndex + 1}-{Math.min(currentIndex + 2, images.length)} of {images.length}
+        Pages {currentIndex + 1}-{Math.min(currentIndex + 2, images.length)} of{" "}
+        {images.length}
       </div>
     </div>
   );
