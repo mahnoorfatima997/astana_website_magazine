@@ -6,13 +6,22 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "../components/card";
 import { Button } from "../components/button";
 
-const images = [
-  "../public/assets/Astana Issue 02 Final (1)-compressed-001.png",
-  "../public/assets/Astana Issue 02 Final (1)-compressed-003.png",
-  "/assets/Astana Issue 02 Final (1)-compressed-004.png",
-  "/assets/Astana Issue 02 Final (1)-compressed-005.png",
-  "/assets/Astana Issue 02 Final (1)-compressed-006.png",
-];
+import { readdirSync } from 'fs';
+import { join } from 'path';
+
+const getImages = () => {
+  try {
+    const imageFiles = readdirSync(join(process.cwd(), 'public/assets'))
+      .filter(file => /\.(png|jpe?g|gif)$/i.test(file))
+      .map(file => `/assets/${file}`);
+    return imageFiles;
+  } catch (error) {
+    console.error('Error reading assets directory:', error);
+    return [];
+  }
+};
+
+const images = getImages();
 
 export default function Component() {
   const [currentIndex, setCurrentIndex] = useState(0);
