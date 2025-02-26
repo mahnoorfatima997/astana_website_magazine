@@ -1,29 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "../components/card";
 import { Button } from "../components/button";
 
-import { readdirSync } from "fs";
-
-const getImages = () => {
-  try {
-    const imageFiles = readdirSync("../public/assets/")
-      .filter((file) => /\.(png|jpe?g|gif)$/i.test(file))
-      .map((file) => `/assets/${file}`);
-    return imageFiles;
-  } catch (error) {
-    console.error("Error reading assets directory:", error);
-    return [];
-  }
-};
-
-const images = getImages();
 
 export default function Component() {
+  const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    // This assumes your images are in the public/assets directory
+    const imageList = [
+      "/assets/Astana Issue 02 Final (1)-compressed-001.png",
+      "/assets/Astana Issue 02 Final (1)-compressed-003.png",
+      "/assets/Astana Issue 02 Final (1)-compressed-004.png",
+      "/assets/Astana Issue 02 Final (1)-compressed-005.png",
+      "/assets/Astana Issue 02 Final (1)-compressed-006.png"
+    ];
+    setImages(imageList);
+  }, []);
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 2 : prevIndex));
