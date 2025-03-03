@@ -5,7 +5,6 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "../components/card";
 import { Button } from "../components/button";
-import { Slider } from "../components/slider"; // Make sure you have a slider component
 
 export default function Component() {
   const [images, setImages] = useState<string[]>([]);
