@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "../components/card";
 import { Button } from "../components/button";
 
+
 export default function Component() {
   const [images, setImages] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -65,24 +66,21 @@ export default function Component() {
           </div>
 
           {/* Navigation Buttons (overlaying the viewer) */}
-          <Button
-            variant="ghost"
-            size="icon"
+          <button
             className="absolute left-4 top-1/2 -translate-y-1/2 h-16 w-16 rounded-full bg-black/40 hover:bg-black/60 text-white"
             onClick={goToPrevious}
             disabled={currentIndex === 0}
-          >
+            >
             <ChevronLeft className="h-8 w-8" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
+          </button>
+
+          <button
             className="absolute right-4 top-1/2 -translate-y-1/2 h-16 w-16 rounded-full bg-black/40 hover:bg-black/60 text-white"
             onClick={goToNext}
             disabled={currentIndex >= images.length - 2}
           >
             <ChevronRight className="h-8 w-8" />
-          </Button>
+          </button>
         </CardContent>
       </Card>
 
